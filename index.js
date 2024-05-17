@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch('https://v1.nocodeapi.com/pinarnurdemirtas/google_sheets/obUbiifpGCMQtoyC?tabId=sayfa1')
     .then(response => response.json())
     .then(data => {
-      kullanicilar = data.data; // Assuming the data is under the 'data' key
+      kullanicilar = data.data; 
       console.log(kullanicilar); 
     })
     .catch(error => {
@@ -56,7 +56,5 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(kullanicilar);
         alert('Yeni kullanıcı eklendi.');
         
-        // You might want to update the Google Sheets here as well
-        // This part requires an additional API call to update the Google Sheets
     });
 });
