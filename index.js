@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let kullanicilar = []; // Declare the variable to store users
+    let kullanicilar = []; 
 
     fetch('https://v1.nocodeapi.com/pinarnurdemirtas/google_sheets/obUbiifpGCMQtoyC?tabId=sayfa1')
     .then(response => response.json())
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log("Kullanıcı: ", user.email, user.password);
             console.log("Girilen: ", email, password);
             if(email === user.email && password === user.password) {
-                document.getElementById('tepki').innerText = user.name + " Twiti";
+                window.location.href = "start.html";
                 validUser = true;
                 break;
             } 
