@@ -1,45 +1,39 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let kullanicilar = []; 
+    let persons = [];
 
-    fetch('https://v1.nocodeapi.com/pinarnurdemirtas/google_sheets/obUbiifpGCMQtoyC?tabId=sayfa1')
+    fetch('persons.json')
     .then(response => response.json())
     .then(data => {
-      kullanicilar = data.data; 
-      console.log(kullanicilar); 
+        persons = data;
+        console.log(persons); 
     })
     .catch(error => {
-      console.error('Kullanıcılar API yüklenirken hata:', error);
-      alert('Kullanıcılar API yüklenirken bir hata oluştu.');
+      console.error('Error', error);
     });
-    
+
+
     document.getElementById('submit').addEventListener('click', function(event) {
         event.preventDefault(); 
-
         var email = document.getElementById('exampleInputEmail1').value;
         var password = document.getElementById('exampleInputPassword1').value;
 
-        if (email.trim() === '' || password.trim() === '') {
-            alert('Lütfen tüm alanları doldurun.');
+        if (email.trim() == '' || password.trim() == '') {
+            alert('Please fill in all fields.');
             return;
         }
 
-        let validUser = false;
-        for(var i = 0; i < kullanicilar.length; i++) {
-            var user = kullanicilar[i];
-            console.log("Kullanıcı: ", user.email, user.password);
-            console.log("Girilen: ", email, password);
-            if(email === user.email && password === user.password) {
-                window.location.href = "start.html";
-                validUser = true;
-                break;
+        for(var i = 0; i < persons.length; i++) {
+            user = persons[i]
+            console.log("Person: ", user.email, user.password);
+            console.log("Entered: ", email, password);
+            if(email == user.email && password == user.password) {
+                window.location.href = "add.html";
+                return;
             } 
-        }
-        if (!validUser) {
-            alert('Geçersiz e-posta veya şifre.');
-        }
+        } alert('Invalid email or password.');
+
     });
-
-
+   
     document.getElementById('submit2').addEventListener('click', function(event) {
         event.preventDefault(); 
 
@@ -48,13 +42,13 @@ document.addEventListener('DOMContentLoaded', function() {
         var password = document.getElementById('exampleInputPassword2').value;
 
         if (name.trim() == '' || email.trim() == '' || password.trim() == '') {
-            alert('Lütfen tüm alanları doldurun.');
+            alert('Please fill in all fields.');
             return;
         }
 
-        kullanicilar.push({name: name, email: email, password: password});
-        console.log(kullanicilar);
-        alert('Yeni kullanıcı eklendi.');
-        
+        persons.push({name: name, email: email, password: password});
+        console.log(persons);
+        alert('New user added.');
+
     });
 });
